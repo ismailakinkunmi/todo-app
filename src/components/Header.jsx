@@ -1,4 +1,3 @@
-//import Navbar from "@/components/Navbar";
 import styles from "@/styles/Header.module.css";
 
 const Header = () => {

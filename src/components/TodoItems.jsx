@@ -1,10 +1,11 @@
 import styles from "@/styles/TodoItem.module.css";
 import { AiFillEdit } from "react-icons/ai";
 import { FaTrash } from "react-icons/fa";
-import { useRef, useState } from "react";
+import { useState, useRef } from "react";
 
 const TodoItem = ({ itemProp, handleChange, delTodo, setUpdate }) => {
   const [editing, setEditing] = useState(false);
+  const [updateInput, setUpdateInput] = useState(itemProp.title);
   const editInputRef = useRef(null);
 
   let viewMode = {};
@@ -59,10 +60,11 @@ const TodoItem = ({ itemProp, handleChange, delTodo, setUpdate }) => {
 
       <input
         type="text"
-        defaultValue={itemProp.title}
         ref={editInputRef}
+        value={updateInput}
         className={styles.textInput}
         style={editMode}
+        onChange={(e) => setUpdateInput(e.target.value)}
         onKeyDown={handleUpdatedDone}
       />
     </li>

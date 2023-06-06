@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import InputTodo from "@/components/InputTodo";
 import TodosList from "@/components/TodosList";
-//import { TodosProvider } from "@/context/TodosContext";
 
 const TodosLogic = () => {
   const [todos, setTodos] = useState(getInitialTodos);
@@ -13,7 +12,6 @@ const TodosLogic = () => {
   }, [todos]);
 
   function getInitialTodos() {
-    // getting stored items
     const temp = localStorage.getItem("todos");
     const savedTodos = JSON.parse(temp);
     return savedTodos || [];
@@ -42,7 +40,6 @@ const TodosLogic = () => {
   };
 
   const addTodoItem = (title) => {
-    // update state with user's input
     const newTodo = {
       id: uuidv4(),
       title: title,
@@ -51,10 +48,7 @@ const TodosLogic = () => {
     setTodos([...todos, newTodo]);
   };
 
-  // other handlers ...
   const setUpdate = (updatedTitle, id) => {
-    // update state
-    console.log("parent render");
     setTodos(
       todos.map((todo) => {
         if (todo.id === id) {
