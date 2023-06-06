@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import InputTodo from "@/components/InputTodo";
 import TodosList from "@/components/TodosList";
-import { TodosProvider } from "@/context/TodosContext";
+//import { TodosProvider } from "@/context/TodosContext";
 
 const TodosLogic = () => {
   const [todos, setTodos] = useState(getInitialTodos);
@@ -54,6 +54,7 @@ const TodosLogic = () => {
   // other handlers ...
   const setUpdate = (updatedTitle, id) => {
     // update state
+    console.log("parent render");
     setTodos(
       todos.map((todo) => {
         if (todo.id === id) {
@@ -65,7 +66,7 @@ const TodosLogic = () => {
   };
 
   return (
-    <TodosProvider>
+    <div>
       <InputTodo addTodoItem={addTodoItem} />
       <TodosList
         todosProps={todos}
@@ -73,7 +74,7 @@ const TodosLogic = () => {
         delTodo={delTodo}
         setUpdate={setUpdate}
       />
-    </TodosProvider>
+    </div>
   );
 };
 export default TodosLogic;
