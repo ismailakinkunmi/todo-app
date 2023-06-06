@@ -5,7 +5,7 @@ import { useState, useRef } from "react";
 
 const TodoItem = ({ itemProp, handleChange, delTodo, setUpdate }) => {
   const [editing, setEditing] = useState(false);
-  //  const [updateInput, setUpdateInput] = useState(itemProp.title);
+  const [updateInput, setUpdateInput] = useState(itemProp.title);
   const editInputRef = useRef(null);
 
   let viewMode = {};
@@ -21,19 +21,18 @@ const TodoItem = ({ itemProp, handleChange, delTodo, setUpdate }) => {
     setEditing(true);
   };
 
+  const handleUpdatedDone = (event) => {
+    if (event.key === "Enter") {
+      setUpdate(editInputRef.current.value, itemProp.id);
+      setEditing(false);
+    }
+  };
+
   const completedStyle = {
     fontStyle: "italic",
     color: "#595959",
     opacity: 0.4,
     textDecoration: "line-through",
-  };
-
-  const handleUpdatedDone = (event) => {
-    if (event.key === "Enter") {
-      //setUpdate(updateInput, itemProp.id);
-      setUpdate(editInputRef.current.value, itemProp.id);
-      setEditing(false);
-    }
   };
 
   return (
@@ -45,12 +44,15 @@ const TodoItem = ({ itemProp, handleChange, delTodo, setUpdate }) => {
           onChange={() => handleChange(itemProp.id)}
           className={styles}
         />
+
         <button onClick={handleEditing}>
           <AiFillEdit style={{ color: "#5e5e5e", fontSize: "16px" }} />
         </button>
+
         <button onClick={() => delTodo(itemProp.id)}>
           <FaTrash style={{ color: "5e5e5e", fontSize: "20px" }} />
         </button>
+
         <span style={itemProp.completed ? completedStyle : null}>
           {itemProp.title}
         </span>
@@ -59,11 +61,10 @@ const TodoItem = ({ itemProp, handleChange, delTodo, setUpdate }) => {
       <input
         type="text"
         ref={editInputRef}
-        defaultValue={itemProp.title}
-        // value={updateInput}
+        value={updateInput}
         className={styles.textInput}
         style={editMode}
-        //onChange={(e) => setUpdateInput(e.target.value)}
+        onChange={(e) => setUpdateInput(e.target.value)}
         onKeyDown={handleUpdatedDone}
       />
     </li>

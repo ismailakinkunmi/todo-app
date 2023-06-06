@@ -12,7 +12,6 @@ const TodosLogic = () => {
   }, [todos]);
 
   function getInitialTodos() {
-    // getting stored items
     const temp = localStorage.getItem("todos");
     const savedTodos = JSON.parse(temp);
     return savedTodos || [];
@@ -41,7 +40,6 @@ const TodosLogic = () => {
   };
 
   const addTodoItem = (title) => {
-    // update state with user's input
     const newTodo = {
       id: uuidv4(),
       title: title,
@@ -50,9 +48,7 @@ const TodosLogic = () => {
     setTodos([...todos, newTodo]);
   };
 
-  // other handlers ...
   const setUpdate = (updatedTitle, id) => {
-    // update state
     setTodos(
       todos.map((todo) => {
         if (todo.id === id) {
